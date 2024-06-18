@@ -1,10 +1,19 @@
-body {
-  padding: 0;
-  margin: 0;
+/* style.css */
+#map {
+  height: 600px;
 }
 
-#map,
-body,
-html {
-  height: 100%;
+.info.legend {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  line-height: 24px;
+}
+
+.legend .color-box {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 5px;
 }
