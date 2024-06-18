@@ -20,6 +20,9 @@ d3.json(url).then(function(data) {
       // Define color based on magnitude
       var fillColor = getColor(feature.properties.mag);
       
+      // Convert timestamp to date
+      var date = new Date(feature.properties.time);
+      
       return L.circleMarker(latlng, {
         radius: radius,
         fillColor: fillColor,
@@ -27,7 +30,11 @@ d3.json(url).then(function(data) {
         weight: 1,
         opacity: 1,
         fillOpacity: 0.8
-      }).bindPopup('Magnitude: ' + feature.properties.mag.toFixed(1) + '<br>Location: ' + feature.properties.place);
+      }).bindPopup(
+        'Magnitude: ' + feature.properties.mag.toFixed(1) +
+        '<br>Location: ' + feature.properties.place +
+        '<br>Date: ' + date.toUTCString() // Convert date to string
+      );
     }
   }).addTo(map);
 }).catch(function(error) {
