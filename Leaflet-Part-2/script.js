@@ -47,7 +47,7 @@ d3.json(earthquakeUrl).then(function(data) {
 });
 
 // Fetch and display tectonic plates data
-var tectonicPlatesUrl = 'tectonic_plates.json';  // Assuming you have saved it locally
+var tectonicPlatesUrl = 'tectonic_plates.json';  
 
 d3.json(tectonicPlatesUrl).then(function(data) {
   L.geoJSON(data, {
