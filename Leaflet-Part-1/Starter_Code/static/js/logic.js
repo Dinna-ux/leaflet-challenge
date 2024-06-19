@@ -1,5 +1,5 @@
 // Initialize Leaflet map centered on the world
-var map = L.map('map').setView([0, 0], 2);
+ map = L.map('map').setView([0, 0], 2);
 
 // Add OpenStreetMap base layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // URL to fetch earthquake GeoJSON data from USGS (past week)
-var url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson';
+url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson';
 
 // D3 to fetch the GeoJSON data
 d3.json(url).then(function(data) {
@@ -15,13 +15,13 @@ d3.json(url).then(function(data) {
   L.geoJSON(data, {
     pointToLayer: function(feature, latlng) {
       // Adjust circle marker size based on earthquake magnitude
-      var radius = Math.sqrt(feature.properties.mag) * 10; 
+      radius = Math.sqrt(feature.properties.mag) * 10; 
       
       // Define color based on depth
-      var fillColor = getColor(feature.geometry.coordinates[2]); 
+      fillColor = getColor(feature.geometry.coordinates[2]); 
       
       // Convert timestamp to date
-      var date = new Date(feature.properties.time);
+      date = new Date(feature.properties.time);
       
       return L.circleMarker(latlng, {
         radius: radius,
@@ -53,10 +53,10 @@ function getColor(depth) {
 }
 
 // Add a legend to the map
-var legend = L.control({ position: 'bottomright' });
+legend = L.control({ position: 'bottomright' });
 
 legend.onAdd = function (map) {
-  var div = L.DomUtil.create('div', 'info legend'),
+      div = L.DomUtil.create('div', 'info legend'),
       depths = [-10, 10, 30, 50, 70, 90],
       labels = ['-10-10', '10-30', '30-50', '50-70', '70-90', '90+'];
 

@@ -1,12 +1,12 @@
 // Initialize Leaflet map centered on the world
-var map = L.map('map').setView([0, 0], 2);
+map = L.map('map').setView([0, 0], 2);
 
 // Define base layers
-var streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-var topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+  topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)'
 });
 
@@ -14,18 +14,18 @@ var topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 streetMap.addTo(map);
 
 // Define layer groups
-var earthquakes = L.layerGroup();
-var tectonicPlates = L.layerGroup();
+     earthquakes = L.layerGroup();
+     tectonicPlates = L.layerGroup();
 
 // Fetch and display earthquake data
-var earthquakeUrl = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson';
+earthquakeUrl = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson';
 
 d3.json(earthquakeUrl).then(function(data) {
   L.geoJSON(data, {
     pointToLayer: function(feature, latlng) {
-      var radius = Math.sqrt(feature.properties.mag) * 10;
-      var fillColor = getColor(feature.geometry.coordinates[2]);
-      var date = new Date(feature.properties.time);
+      radius = Math.sqrt(feature.properties.mag) * 10;
+      fillColor = getColor(feature.geometry.coordinates[2]);
+      date = new Date(feature.properties.time);
       
       return L.circleMarker(latlng, {
         radius: radius,
@@ -47,7 +47,7 @@ d3.json(earthquakeUrl).then(function(data) {
 });
 
 // Fetch and display tectonic plates data
-var tectonicPlatesUrl = 'tectonic_plates.json';  
+tectonicPlatesUrl = 'tectonic_plates.json';  
 
 d3.json(tectonicPlatesUrl).then(function(data) {
   L.geoJSON(data, {
@@ -73,12 +73,12 @@ function getColor(depth) {
 }
 
 // Add layer control
-var baseMaps = {
+   baseMaps = {
   "Street Map": streetMap,
   "Topographic Map": topoMap
 };
 
-var overlayMaps = {
+overlayMaps = {
   "Earthquakes": earthquakes,
   "Tectonic Plates": tectonicPlates
 };
@@ -86,14 +86,14 @@ var overlayMaps = {
 L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 
 // Add a legend for depth
-var legendDepth = L.control({ position: 'bottomright' });
+legendDepth = L.control({ position: 'bottomright' });
 
 legendDepth.onAdd = function (map) {
-  var div = L.DomUtil.create('div', 'info legend'),
+      div = L.DomUtil.create('div', 'info legend'),
       depths = [-10, 10, 30, 50, 70, 90],
       labels = ['-10-10', '10-30', '30-50', '50-70', '70-90', '90+'];
 
-  for (var i = 0; i < depths.length; i++) {
+  for (i = 0; i < depths.length; i++) {
     div.innerHTML +=
       '<i class="color-box" style="background:' + getColor(depths[i] + 0.1) + '"></i> ' +
       labels[i] + '<br>';
