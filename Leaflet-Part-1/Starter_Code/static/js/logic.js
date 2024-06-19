@@ -15,10 +15,10 @@ d3.json(url).then(function(data) {
   L.geoJSON(data, {
     pointToLayer: function(feature, latlng) {
       // Adjust circle marker size based on earthquake magnitude
-      var radius = Math.sqrt(feature.properties.mag) * 10; // Example scaling
+      var radius = Math.sqrt(feature.properties.mag) * 10; 
       
       // Define color based on depth
-      var fillColor = getColor(feature.geometry.coordinates[2]); // Use depth for color
+      var fillColor = getColor(feature.geometry.coordinates[2]); 
       
       // Convert timestamp to date
       var date = new Date(feature.properties.time);
